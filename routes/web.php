@@ -36,7 +36,7 @@ Route::group(
         Route::get('/',DashboardController::class)->name('dashboard');    
         Route::resource('/services',ServiceController::class);
         Route::resource('/projects',ProjectController::class);
-        Route::resource('/tech',TechController::class);
+        Route::resource('/techs',TechController::class);
         
     });
 

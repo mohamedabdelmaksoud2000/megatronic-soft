@@ -2,26 +2,35 @@
 
 namespace App\Traits ;
 
+use Illuminate\Support\Facades\Storage;
+
 trait ImageFile 
 {
 
-    public function uploadImage($images,$model)
+    public function uploadFile($image,$folder)
     {
+        $name = $image->hashName();
+        $image->store($folder);
+        $data = ['url' => $name];
+        return $data;
+    }
 
-        foreach($images as $image)
+    public function updateFile($image,$oldImage,$folder)
+    {
+            Storage::disk('public')->delete( $folder .'/'.$oldImage);
+            $name = $image->hashName();
+            $image->store($folder);
+            $data = ['url'=>$name] ;
+            return $data ;
+    }
+
+    public function deleteFile($nameImage , $folder)
+    {
+        $path = $folder . '/' . $nameImage;
+        if(Storage::disk('public')->exists($path))
         {
-            
+            Storage::delete($path);
         }
-
-    }
-
-    public function updateImage()
-    {
-
-    }
-
-    public function deleteImage()
-    {
-
+        return 1;
     }
 }

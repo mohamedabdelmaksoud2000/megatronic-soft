@@ -11,7 +11,7 @@ class UpdateTechRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateTechRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'          => ['required','unique:services,name,'.$this->id],
+            'description'   => ['required'],
+            'image_file'    => ['image'],
+            'teches'        => ['required','array'],
+            'teches.*'      => ['required','exists:teches,id']
         ];
     }
 }

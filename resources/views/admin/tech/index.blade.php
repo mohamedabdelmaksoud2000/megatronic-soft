@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-show all Services
+show all technologies
 @endsection
 
 @section('css')
@@ -12,7 +12,7 @@ show all Services
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">show all</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Service</span>
+							<h4 class="content-title mb-0 my-auto">show all</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Technology</span>
 						</div>
 					</div>
 				</div>
@@ -27,7 +27,7 @@ show all Services
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between">
-                                <h4 class="card-title mg-b-0">Information</h4>
+                                <h4 class="card-title mg-b-0">Artists</h4>
                             </div>
                         </div>
                         <div class="card-body">
@@ -38,32 +38,24 @@ show all Services
                                             <th class="wd-5p border-bottom-0"></th>
                                             <th class="wd-10p border-bottom-0">Image</th>
                                             <th class="wd-20p border-bottom-0">Name</th>
-                                            <th class="wd-20p border-bottom-0">No. Projects</th>
-                                            <th class="wd-20p border-bottom-0">technologies</th>
                                             <th class="wd-25p border-bottom-0">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ( $services as $i=>$service)
+                                        @foreach ( $techs as $i=>$tech)
                                             
                                             <tr>
                                                 <td>{{ $i + 1 }}</td>
-                                                <td><img class="avatar-md rounded-circle my-auto" src="{{ $service->imageUrl }}"></td>
-                                                <td>{{ $service->name }}</td>
-                                                <td>{{ $service->projects->count() }}</td>
-                                                <td>
-                                                    @foreach ($service->teches as $tech)
-                                                        <span class="badge badge-primary">{{ $tech->name }}</span>
-                                                    @endforeach
-                                                </td>
+                                                <td><img class="avatar-md rounded-circle my-auto" src="{{ $tech->imageUrl }}"></td>
+                                                <td>{{ $tech->name}}</td>
                                                 <td>
 													<a href="" class="btn btn-md btn-primary">
 														<i class="fa fa-search"></i>
 													</a>
-													<a href="{{ route('service.edit',$service->id) }}" class="btn btn-md btn-info">
+													<a href="{{ route('tech.edit',$tech->id) }}" class="btn btn-md btn-info">
 														<i class="fa fa-pen"></i>
 													</a>
-                                                    <button type="button" class="btn btn-md btn-danger"data-toggle="modal" data-target="#deleteSection" onclick="getid({{$service->id}})">
+                                                    <button type="button" class="btn btn-md btn-danger"data-toggle="modal" data-target="#deleteSection" onclick="getid({{$tech->id}})">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
 												</td>
@@ -88,9 +80,9 @@ show all Services
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Sure delete Service
+                                Sure delete technology
                             </div>
-                            <form method="POST" action="{{route('service.destroy')}}">
+                            <form method="POST" action="{{route('tech.destroy')}}">
                                 @csrf
                                 @method('DELETE')
                                 <div class="modal-footer">

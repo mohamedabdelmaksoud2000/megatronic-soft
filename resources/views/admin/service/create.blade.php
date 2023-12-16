@@ -24,9 +24,8 @@ Create new Technology
 @endsection
 
 @section('content')
-				<form method="POST" action="{{route('service.update',$service->id)}}" enctype="multipart/form-data">
+				<form method="POST" action="{{route('service.store')}}" enctype="multipart/form-data">
 				@csrf
-				@method('PUT')
 				<!-- row -->
 				@if ($errors->any())
 				<!-- row -->
@@ -57,7 +56,7 @@ Create new Technology
 								<div class="row">
 									<div class="col-4 form-group">
 										<label for="name">Name</label>
-										<input type="text" name="name" class="form-control" id="name" placeholder="insert name's service" value="{{ $service->name }}">
+										<input type="text" name="name" class="form-control" id="name" placeholder="insert name's service">
 									</div>
 								</div>
 							</div>
@@ -72,23 +71,6 @@ Create new Technology
                                 <h6 class="card-title mb-0"><i class="fa-solid fa-align-justify"></i> Technologies</h6>
                             </div>
                             <div id="newtech" class="card-body row">
-								@foreach ($service->teches as $teche )
-									<div class="row col-sm-12">
-										<div class="col-sm-12 col-md-4 form-group">
-											<p class="mg-b-10">technology</p>
-											<select name="teches[]" class="form-control">
-												<option label="choose Technology">
-												</option>
-												@foreach ($techs as $tech)
-													<option value="{{ $tech->id }}" @if ($teche->id == $tech->id) selected @endif>
-														{{ $tech->name }}
-													</option>
-												@endforeach
-											</select>
-										</div>
-										<button type="button" style="height: 38px;margin-top: 31px;" class="btn btn-danger btn-sm" id="remove-btn"><i class="fa-solid fa-minus" style="color: #fff"></i></button>
-									</div>
-								@endforeach
                             </div>
                             <button type="button" class="btn btn-info btn-sm" id="add_tech"><i class="fa-solid fa-plus"></i></button>
                         </div>
@@ -104,11 +86,8 @@ Create new Technology
 									<h6 class="card-title mb-1">Upload image</h6>
 								</div>
 								<div class="row mb-4">
-									<div class="col-sm-6">
+									<div class="col-sm-12">
 										<input type="file" name="image_file" class="dropify" data-height="200" />
-									</div>
-									<div class="col-sm-6">
-										<img style="width: 100%" src="{{ $service->imageUrl }}" />
 									</div>
 								</div>
 							</div>
@@ -124,7 +103,7 @@ Create new Technology
                             </div>
                             <div class="card-body row">
                                 <div class="form-group col-sm-12">
-                                    <textarea id="editor" class="ckeditor form-control" name="description">{{ $service->description }}</textarea>
+                                    <textarea id="editor" class="ckeditor form-control" name="description"></textarea>
                                 </div>
                             </div>
                         </div>

@@ -33,10 +33,43 @@ Route::group(
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' , 'auth']
     ], function(){ 
 
-        Route::get('/',DashboardController::class)->name('dashboard');    
-        Route::resource('/services',ServiceController::class);
-        Route::resource('/projects',ProjectController::class);
-        Route::resource('/techs',TechController::class);
+        Route::get('/',DashboardController::class)->name('dashboard');  
+        
+        Route::prefix('/techs')
+        ->name('tech.')
+        ->controller(TechController::class)
+        ->group(function(){
+            Route::get('/','index')->name('index');
+            Route::get('/create','create')->name('create');
+            Route::post('/create','store')->name('store');
+            Route::get('/edit/{id}','edit')->name('edit');
+            Route::put('/edit/{id}','update')->name('update');
+            Route::delete('/delete','destroy')->name('destroy');
+        });
+        
+        Route::prefix('/services')
+        ->name('service.')
+        ->controller(ServiceController::class)
+        ->group(function(){
+            Route::get('/','index')->name('index');
+            Route::get('/create','create')->name('create');
+            Route::post('/create','store')->name('store');
+            Route::get('/edit/{id}','edit')->name('edit');
+            Route::put('/edit/{id}','update')->name('update');
+            Route::delete('/delete','destroy')->name('destroy');
+        });
+
+        Route::prefix('/projects')
+        ->name('project.')
+        ->controller(ProjectController::class)
+        ->group(function(){
+            Route::get('/','index')->name('index');
+            Route::get('/create','create')->name('create');
+            Route::post('/create','store')->name('store');
+            Route::get('/edit/{id}','edit')->name('edit');
+            Route::put('/edit/{id}','update')->name('update');
+            Route::delete('/delete','destroy')->name('destroy');
+        });
         
     });
 

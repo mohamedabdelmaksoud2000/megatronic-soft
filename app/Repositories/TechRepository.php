@@ -41,7 +41,7 @@ class TechRepository implements TechInterface
     public function update($request, string $id)
     {
         $tech = $this->find($id);
-        $tech->update($request);
+        $tech->update($request->all());
         return $tech;
     }
 

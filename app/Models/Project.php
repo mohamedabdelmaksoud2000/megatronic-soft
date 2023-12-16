@@ -12,7 +12,8 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
-        'link'
+        'link',
+        'service_id'
     ];
 
     public function images()
@@ -24,7 +25,5 @@ class Project extends Model
     {
         return $this->belongsTo(Service::class);
     }
-
-    
 
 }

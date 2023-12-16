@@ -11,7 +11,7 @@ class StoreTechRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreTechRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'      => ['required','unique:techs,name'],
+            'image_file'=> ['required','image']
         ];
     }
 }
